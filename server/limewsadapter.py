@@ -1,10 +1,9 @@
 
 class LimeWSAdapter:
-    def __init__(self):
-        print("Init")
+    # def __init__(self):
 
     @staticmethod
-    def get_tastings(self):
+    def get_events():
         return {
             'success': 'true',
             'tastings': [
@@ -14,9 +13,10 @@ class LimeWSAdapter:
         }
 
     @staticmethod
-    def get_drinks_for_tasting(self, tastingid):
+    def get_whisky_by_event(event_id):
         return {
             'success': 'true',
+            'eventid': event_id,
             'drinks': [
                 {'id': 1, 'name': 'Whisky1'},
                 {'id': 2, 'name': 'Whisky2'}
@@ -24,7 +24,7 @@ class LimeWSAdapter:
         }
 
     @staticmethod
-    def get_users(self):
+    def get_users():
         return {
             'success': 'true',
             'users': [
@@ -34,7 +34,7 @@ class LimeWSAdapter:
         }
 
     @staticmethod
-    def add_review(self):
+    def add_review(review_data):
        return {
             'success': 'true'
         }
