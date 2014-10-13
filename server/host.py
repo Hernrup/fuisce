@@ -1,5 +1,5 @@
 import bottle
-from bottle import redirect, static_file
+from bottle import redirect, static_file, Bottle
 from limewsadapter import LimeWSAdapter
 from datacache import DataCache
 import os
@@ -9,55 +9,55 @@ import logging
 import signal
 from customlogger import Log
 
+
 class Host:
 
-    # Definitions
-    app = None,
-    logger = None
-    dataCahce = None
-
     def __init__(self):
-        global app, logger, dataCache
 
         # Create objects
-        app = bottle.app()
-        logger = Log().instance()
-        dataCache = DataCache()
+        # app = bottle.app()
+        self.logger = Log().instance()
+        self.dataCache = DataCache()
+
+        self._app = Bottle()
+        self._route()
 
         # Init
-        dataCache.refresh()
+        self.dataCache.refresh()
+
+    def _route(self):
+        self._app.route('/', method="GET", callback=self._sendMainPage)
+        self._app.route('/client/<filename:path>', method="GET", callback=self._send_static)
+
+        self._app.route('/api/tasting/', method="GET", callback=self._getTastings)
+        self._app.route('/api/drink/', method="GET", callback=self._getDrinks)
+        self._app.route('/api/user/', method="GET", callback=self._getUsers)
+
+        self._app.route('/api/review/', method="PUT", callback=self._putReview)
 
     # Start server
-    def start_server(port):
-        global  app
+    def start_server(self, port):
 
         # Ready to serve
-        logger.info("Server is starting")
-        bottle.run(host="0.0.0.0", port=int(port), app=app, server='cherrypy', debug=True, reloader=True)
+        self.logger.info("Server is starting")
+        self._app.run(host="0.0.0.0", port=int(port), server='cherrypy', debug=True, reloader=True)
 
-    # Index page
-    @app.route('/')
-    def send_static(self):
+    def _sendMainPage(self):
         return static_file('/index.html', root='../client/app/')
 
-    # GetTastings
-    @app.route('/api/tastings/', method='GET')
-    def getTastings(self):
-       print("Get all tastings with drinks")
+    def _getTastings(self):
+        return LimeWSAdapter.get_tastings()
 
-    # GetDrinks
-    @app.route('/api/drinks/', method='GET')
-    def getDrinks(self):
+    def _getDrinks(self):
        print("Get all drunks")
 
-    # PutReview
-    @app.route('/api/review/', method='PUT')
-    def putReview(self):
+    def _getUsers(self):
+       print("Get all drunks")
+
+    def _putReview(self):
        print("Save review")
 
-    # Static content
-    @app.route('/client/<filename:path>')
-    def send_static(filename):
+    def _send_static(filename):
         filename = filename
         if os.path.isfile('../client/app/'+filename):
             return static_file(filename, root='../client/app/')
