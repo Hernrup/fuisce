@@ -8,7 +8,12 @@ def main():
     set_exit_handler(on_exit)
 
     # setup loggin
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format='%(asctime)s.%(msecs)d %(levelname)s %(module)s - %(funcName)s: %(message)s',
+        datefmt="%Y-%m-%d %H:%M:%S"
+    )
+
 
     # Create objects
     host = Host()

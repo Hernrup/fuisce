@@ -13,13 +13,14 @@ class Host:
         self._route()
 
     def _route(self):
+
+        self._app.route('/', method="GET", callback=self._send_main_page)
+        self._app.route('/<filename:path:re:^(?!/api).+>', method="GET", callback=self._send_static)
+
         self._app.route('/api/event/', method="GET", callback=self._get_events)
         self._app.route('/api/whisky/', method="GET", callback=self._get_whisky)
         self._app.route('/api/user/', method="GET", callback=self._get_users)
         self._app.route('/api/review/', method="POST", callback=self._post_review)
-
-        self._app.route('/', method="GET", callback=self._send_main_page)
-        self._app.route('/<filename:path>', method="GET", callback=self._send_static)
 
     # Start server
     def start_server(self, port):
@@ -43,20 +44,28 @@ class Host:
     @staticmethod
     def _get_events():
         return LimeWSAdapter.get_events()
+        return Host.jsonp(request, LimeWSAdapter.get_events())
 
     @staticmethod
     def _get_whisky():
         event = request.query.get('event')
-        return LimeWSAdapter.get_whisky_by_event(event)
+        return Host.jsonp(request, LimeWSAdapter.get_whisky_by_event(event))
 
     @staticmethod
     def _get_users():
-       return LimeWSAdapter.get_users()
+        event = request.query.get('event')
+        return Host.jsonp(request, LimeWSAdapter.get_users(event))
 
     @staticmethod
     def _post_review():
         content = request.json
         print(content)
         return LimeWSAdapter.add_review(content)
+
+    @staticmethod
+    def jsonp(request, dictionary):
+        if request.query.callback:
+            return "%s(%s)" % (request.query.callback, dictionary)
+        return dictionary
 
 

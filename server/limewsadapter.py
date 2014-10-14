@@ -6,9 +6,9 @@ class LimeWSAdapter:
     def get_events():
         return {
             'success': 'true',
-            'tastings': [
-                {'id': 1, 'name': 'Whisky1', 'date': '2014-01-01'},
-                {'id': 2, 'name': 'Whisky2', 'date': '2014-01-02'}
+            'events': [
+                {'id': 1, 'name': 'Event1', 'date': '2014-01-01'},
+                {'id': 2, 'name': 'Event2', 'date': '2014-01-02'}
             ]
         }
 
@@ -17,16 +17,17 @@ class LimeWSAdapter:
         return {
             'success': 'true',
             'eventid': event_id,
-            'drinks': [
+            'whiskys': [
                 {'id': 1, 'name': 'Whisky1'},
                 {'id': 2, 'name': 'Whisky2'}
             ]
         }
 
     @staticmethod
-    def get_users():
+    def get_users(event_id):
         return {
             'success': 'true',
+            'eventid': event_id,
             'users': [
                 {'id': 1, 'name': 'User1'},
                 {'id': 2, 'name': 'User2'}

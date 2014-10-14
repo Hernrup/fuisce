@@ -1,0 +1,108 @@
+
+
+
+
+
+  
+
+  
+
+  
+
+<form role="form">
+  <div class="form-group">
+   <label for="">Event</label>
+  <select 
+    ng-model="selectedEvent" 
+    ng-options="event as event.name for event in events"
+    ng-change="eventChanged(selectedEvent)"
+  ></select>
+
+  </div>
+  <div class="form-group">
+   <label for="">User</label>
+   <select 
+    ng-model="selectedUser" 
+    ng-options="user as user.name for user in users"
+    ng-change="userChanged(selectedUser)"
+  ></select>
+  </div>
+
+  <div class="form-group">
+  <label for="whisky">Whisky</label>
+  <select 
+    id="whisky"
+    ng-model="selectedWhisky" 
+    ng-options="w as w.name for w in whiskys"
+    ng-change="whiskyChanged(selectedWhisky)"
+  ></select>
+  </div>
+
+   <div class="form-group">
+    <label for="">Nose</label>
+    <textarea
+    ng-model="review.nose"
+    ng-maxlength="150"
+  />
+  </div>
+
+
+   <div class="form-group">
+    <label for="">Taste</label>
+    <textarea
+    ng-model="review.taste"
+    ng-maxlength="150"
+  />
+  </div>
+
+
+   <div class="form-group">
+    <label for="">Finish</label>
+    <textarea
+    ng-model="review.finish"
+    ng-maxlength="150"
+  />
+  </div>
+
+  <div class="form-group">
+    <label for="">Comment</label>
+    <textarea
+    ng-model="review.comment"
+    ng-maxlength="150"
+  />
+  </div>
+
+
+   <div class="form-group">
+   <label for="">Smokyness</label>
+    <select 
+    ng-model="review.smokyness" 
+    ng-options="i as i for i in rangeFive"
+  ></select>
+  </div>
+
+     <div class="form-group">
+     <label for="">Strength</label>
+    <select 
+    ng-model="review.strength" 
+    ng-options="i as i for i in rangeFive"
+  ></select>
+  </div>
+
+
+   <div class="form-group">
+   <label for="">Points</label>
+    <select 
+    ng-model="review.points" 
+    ng-options="i as i for i in rangeHundred"
+  ></select>
+  </div>
+
+
+  <button 
+    type="submit" 
+    class="btn btn-default"
+    ng-click="submitReview()"
+    ng-disabled="enableReviewPost"
+    >Submit</button>
+</form>
