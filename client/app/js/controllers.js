@@ -5,7 +5,7 @@
 var fuisceControllers = angular.module('fuisceControllers', ['angular-growl']);
 
 fuisceControllers.config(['growlProvider', function(growlProvider) {
-  growlProvider.globalTimeToLive(3000);
+  growlProvider.globalTimeToLive(4000);
   growlProvider.globalDisableCloseButton(true);
   growlProvider.globalPosition('bottom-center');
   growlProvider.globalDisableCountDown(true);
@@ -26,39 +26,42 @@ fuisceControllers.controller('ReviewController', ['$scope', '$http', 'ApiService
 
     $scope.eventChanged = function (item) {
       reloadUsers($scope);
+      growl.info('Thats a fine place to be!')
     }
 
 
     $scope.userChanged = function (item) {
       reloadWhiskys($scope);
       reloadReview($scope);
+      growl.info('Not you again...')
     }
 
     $scope.whiskyChanged = function (item) {
       reloadReview($scope);
+      growl.info('Alright, have at it!')
     }
 
     function reloadEvents($scope){
       ApiService.getEvents(function(data){
         $scope.events = data.events;
-        $scope.selectedEvent = data.events[0]
-        $scope.eventChanged($scope.selectedEvent)
+        // $scope.selectedEvent = data.events[0]
+        // $scope.eventChanged($scope.selectedEvent)
       })
     }
 
     function reloadUsers($scope){
       ApiService.getUsers($scope.selectedEvent.id, function(data){
         $scope.users = data.users;
-        $scope.selectedUser = data.users[0];
-        $scope.userChanged($scope.selectedUser)
+        // $scope.selectedUser = data.users[0];
+        // $scope.userChanged($scope.selectedUser)
       })
     }
 
     function reloadWhiskys($scope){
       ApiService.getWhiskys($scope.selectedEvent.id, function(data){
         $scope.whiskys = data.whiskys;
-        $scope.selectedWhisky = data.whiskys[0];
-        $scope.whiskyChanged($scope.selectedWhisky);
+        // $scope.selectedWhisky = data.whiskys[0];
+        // $scope.whiskyChanged($scope.selectedWhisky);
       })
     }
 
@@ -72,7 +75,7 @@ fuisceControllers.controller('ReviewController', ['$scope', '$http', 'ApiService
         $scope.selectedWhisky = {id: 0}; 
         reloadReview($scope);
         $scope.enableReviewPost = false;
-        growl.success("Your review has been saved")
+        growl.success("Thats what you think!? I better save that one for later!")
       })
     }
 

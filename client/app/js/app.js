@@ -4,9 +4,7 @@
 
 var fuisceApp = angular.module('fuisceApp', [
   'ngRoute',
-  'phonecatAnimations',
   'fuisceControllers',
-  // 'phonecatFilters',
   'fuisceServices',
   'angular-growl'
 ]);
