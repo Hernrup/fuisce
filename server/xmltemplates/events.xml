@@ -1,0 +1,13 @@
+<query distinct="0">
+
+ <tables>
+     <table>event</table>
+ </tables>
+
+ <fields>
+     <field>idevent</field>
+     <field sortorder="asc" sortindex="1">name</field>
+ </fields>
+
+</query>
+

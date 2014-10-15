@@ -5,7 +5,7 @@
 var fuisceControllers = angular.module('fuisceControllers', ['angular-growl']);
 
 fuisceControllers.config(['growlProvider', function(growlProvider) {
-  growlProvider.globalTimeToLive(4000);
+  growlProvider.globalTimeToLive(6000);
   growlProvider.globalDisableCloseButton(true);
   growlProvider.globalPosition('bottom-center');
   growlProvider.globalDisableCountDown(true);
@@ -15,6 +15,7 @@ fuisceControllers.controller('ReviewController', ['$scope', '$http', 'ApiService
   function($scope, $http, ApiService, growl) {
 
     reloadEvents($scope);
+    reloadReview($scope);
 
     $scope.selectedUser = {id: 0};
     $scope.selectedEvent = {id: 0};

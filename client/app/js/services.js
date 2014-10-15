@@ -5,7 +5,7 @@
 var fuisceServices = angular.module('fuisceServices', ['ngResource', 'angular-growl']);
 
 fuisceServices.config(['growlProvider', function(growlProvider) {
-  growlProvider.globalTimeToLive(3000);
+  growlProvider.globalTimeToLive(6000);
   growlProvider.globalDisableCloseButton(true);
   growlProvider.globalPosition('bottom-center');
   growlProvider.globalDisableCountDown(true);
@@ -38,7 +38,7 @@ fuisceServices.factory('ApiService', ['$resource', '$http', '$exceptionHandler',
 
   function getEvents(callback){
   	
-  	$http.get('/api/event/')
+  	$http.get('/api/event/',{})
     .success(function(data) {
     	callback(data);
     })
@@ -48,8 +48,7 @@ fuisceServices.factory('ApiService', ['$resource', '$http', '$exceptionHandler',
   }
 
   function getUsers(event_id, callback){
-  	
-  	$http.get('/api/user/', {event: event_id})
+  	$http.get('/api/user/', {params: {event: event_id, rnd: (new Date).getTime()}})
     .success(function(data) {
     	callback(data);
     })
@@ -60,7 +59,7 @@ fuisceServices.factory('ApiService', ['$resource', '$http', '$exceptionHandler',
 
   function getWhiskys(event_id, callback){
   	
-  	$http.get('/api/whisky/' , {event: event_id})
+  	$http.get('/api/whisky/' , {params: {event: event_id, rnd: (new Date).getTime()}})
     .success(function(data) {
     	callback(data);
     })
@@ -70,7 +69,7 @@ fuisceServices.factory('ApiService', ['$resource', '$http', '$exceptionHandler',
   }
 
   function saveReview(review, callback){
-  	$http.post('/api/review/' , {review: review})
+  	$http.post('/api/review/' , {params: {review: review, rnd: (new Date).getTime()}})
     .success(function(data) {
     	callback(data);
     })

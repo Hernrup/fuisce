@@ -11,6 +11,7 @@ class Host:
         # Create objects
         self._app = Bottle()
         self._route()
+        self._adapter = LimeWSAdapter()
 
     def _route(self):
 
@@ -41,26 +42,20 @@ class Host:
             logging.warning("static file not found: %s" % filename)
         return ''
 
-    @staticmethod
-    def _get_events():
-        return LimeWSAdapter.get_events()
-        return Host.jsonp(request, LimeWSAdapter.get_events())
+    def _get_events(self):
+        return Host.jsonp(request, self._adapter.get_events())
 
-    @staticmethod
-    def _get_whisky():
+    def _get_whisky(self):
         event = request.query.get('event')
-        return Host.jsonp(request, LimeWSAdapter.get_whisky_by_event(event))
+        return Host.jsonp(request, self._adapter.get_whisky_by_event(event))
 
-    @staticmethod
-    def _get_users():
+    def _get_users(self):
         event = request.query.get('event')
-        return Host.jsonp(request, LimeWSAdapter.get_users(event))
+        return Host.jsonp(request, self._adapter.get_users(event))
 
-    @staticmethod
-    def _post_review():
+    def _post_review(self):
         content = request.json
-        print(content)
-        return LimeWSAdapter.add_review(content)
+        return self._adapter.add_review(content)
 
     @staticmethod
     def jsonp(request, dictionary):

@@ -17,7 +17,7 @@ def main():
 
     # Create objects
     host = Host()
-    host.start_server(8080)
+    host.start_server(80)
 
 # Define Exit handler
 def set_exit_handler(func):
