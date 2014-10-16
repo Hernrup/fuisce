@@ -1,0 +1,19 @@
+<query distinct="0">
+
+ <tables>
+     <table>participant</table>
+ </tables>
+
+ <fields>
+     <field>idparticipant</field>
+     <field sortorder="asc" sortindex="1">taster.name</field>
+     <field sortorder="asc" sortindex="1">taster.idtaster</field>
+ </fields>
+<conditions>
+     <condition operator="=">
+         <exp type="field">event</exp>
+         <exp type="numeric">{1}</exp>
+     </condition>
+  </conditions>
+</query>
+
