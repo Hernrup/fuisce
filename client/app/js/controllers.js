@@ -21,8 +21,8 @@ fuisceControllers.controller('ReviewController', ['$scope', '$http', 'ApiService
     $scope.selectedEvent = {id: 0};
     $scope.selectedWhisky = {id: 0};
  
-    $scope.rangeHundred = Array.apply(null, Array(100)).map(function (_, i) {return (i+1);});
-    $scope.rangeFive = Array.apply(null, Array(5)).map(function (_, i) {return i+1;});
+    $scope.rangeHundred = (Array.apply(null, Array(100)).map(function (_, i) {return (i+1);})).reverse();
+    $scope.rangeFive = (Array.apply(null, Array(5)).map(function (_, i) {return i+1;}));
     $scope.enableReviewPost = false;
 
     $scope.eventChanged = function (item) {
