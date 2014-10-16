@@ -7,3 +7,7 @@ body {
 textarea.form-control {
   height: 4em !important;
 }
+
+table#pointsTable td{
+  min-width: 65px;
+}

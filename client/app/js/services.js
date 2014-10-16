@@ -22,7 +22,7 @@ fuisceServices.factory('ApiService', ['$resource', '$http', '$exceptionHandler',
   	self.user = user_id;
   	self.event = event_id;
   	self.whisky = whisky_id;
-  	self.points = 1;
+  	self.points = 50;
   	self.nose = "";
   	self.taste = "";
   	self.finish = "";
