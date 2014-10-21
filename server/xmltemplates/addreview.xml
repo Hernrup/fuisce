@@ -1,0 +1,16 @@
+<data>
+ <opinion
+         idopinion="-1"
+         taster="{1}"
+         event="{2}"
+         whisky="{3}"
+         points="{4}"
+         smokiness="{5}"
+         strength="{6}"
+         nose="{7}"
+         taste="{8}"
+         finish="{9}"
+         comment="{10}"
+         taste_date="{11}"
+         />
+</data>

@@ -1,0 +1,13 @@
+/* app css stylesheet */
+
+body {
+  padding-top: 20px;
+}
+
+textarea.form-control {
+  height: 4em !important;
+}
+
+table#pointsTable td{
+  min-width: 65px;
+}

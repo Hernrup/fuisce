@@ -8,11 +8,16 @@ def main():
     set_exit_handler(on_exit)
 
     # setup loggin
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format='%(asctime)s.%(msecs)d %(levelname)s %(module)s - %(funcName)s: %(message)s',
+        datefmt="%Y-%m-%d %H:%M:%S"
+    )
+
 
     # Create objects
     host = Host()
-    host.start_server(8080)
+    host.start_server(80)
 
 # Define Exit handler
 def set_exit_handler(func):
